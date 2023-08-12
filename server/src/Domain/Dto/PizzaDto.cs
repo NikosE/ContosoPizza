@@ -1,14 +1,22 @@
+using Domain.Models;
+
 namespace Domain.Dto;
 
 public record PizzaDto(
       int Id,
       string Name,
       string Sauce,
-      List<PizzaToppingDto> Toppings
+      List<ToppingDto> Toppings
    );
 
-   public record PizzaToppingDto(
-      int Id, 
-      string Name, 
-      decimal Calories
-   );
+public record CreatePizzaDto(
+   int Id,
+   string Name,
+   Sauce Sauce
+);
+
+public record PizzaSauceDto(
+   int Id,
+   string Name,
+   Sauce Sauce
+);

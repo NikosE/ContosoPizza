@@ -1,5 +1,5 @@
 using Application.Interfaces;
-using Application.Services;
+using Domain.Dto;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,7 @@ public class PizzaController : ControllerBase
    [HttpGet]
    public async Task<IEnumerable<Pizza>> GetAll()
    {
-      return await _pizzaService.GetAll(); //GetAll();
+      return await _pizzaService.GetAll();
    }
 
    [HttpGet("{id}")]
@@ -28,57 +28,21 @@ public class PizzaController : ControllerBase
 
 
    [HttpPost]
-   public async Task<IActionResult> Create(Pizza newPizza)
-   {
-      var pizza = await _pizzaService.Create(newPizza);
-      return CreatedAtAction(nameof(GetById), new { id = pizza!.Id }, pizza);
-   }
+   public async Task<IActionResult> CreatePizza(CreatePizzaDto dto, CancellationToken token)
+      => Ok(await _pizzaService.CreatePizza(dto, token));
+
 
    [HttpPut("{id}/addtopping")]
-   public IActionResult AddTopping(int id, int toppingId)
-   {
-      var pizzaToUpdate = _pizzaService.GetById(id);
-
-      if(pizzaToUpdate is not null)
-      {
-         _pizzaService.AddTopping(id, toppingId);
-         return NoContent();    
-      }
-      else
-      {
-         return NotFound();
-      }
-   }
+   public async Task<IActionResult> AddTopping(PizzaDto dto, int toppingId, CancellationToken token)
+      => Ok(await _pizzaService.AddTopping(dto, toppingId, token));
+      
 
    [HttpPut("{id}/updatesauce")]
-   public IActionResult UpdateSauce(int id, int sauceId)
-   {
-      var pizzaToUpdate = _pizzaService.GetById(id);
+   public async Task<IActionResult> UpdateSauce(int id, [FromBody] PizzaSauceDto dto, CancellationToken token)
+      => Ok(await _pizzaService.UpdateSauce(id, dto, token));
 
-      if(pizzaToUpdate is not null)
-      {
-         _pizzaService.UpdateSauce(id, sauceId);
-         return NoContent();    
-      }
-      else
-      {
-         return NotFound();
-      }
-   }
-
+   
    [HttpDelete("{id}")]
-   public IActionResult Delete(int id)
-   {
-      var pizza = _pizzaService.GetById(id);
-
-      if(pizza is not null)
-      {
-         _pizzaService.DeleteById(id);
-         return Ok();
-      }
-      else
-      {
-         return NotFound();
-      }
-   }
+   public async Task<IActionResult> DeletePizza(int id, CancellationToken token)
+      => Ok(await _pizzaService.DeletePizza(id, token));
 }
