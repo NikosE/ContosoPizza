@@ -28,12 +28,12 @@ public class PizzaController : ControllerBase
 
 
    [HttpPost]
-   public async Task<IActionResult> CreatePizza(CreatePizzaDto dto, CancellationToken token)
+   public async Task<IActionResult> CreatePizza([FromBody]CreatePizzaDto dto, CancellationToken token)
       => Ok(await _pizzaService.CreatePizza(dto, token));
 
 
    [HttpPut("{id}/addtopping")]
-   public async Task<IActionResult> AddTopping(PizzaDto dto, int toppingId, CancellationToken token)
+   public async Task<IActionResult> AddTopping([FromBody]PizzaDto dto, int toppingId, CancellationToken token)
       => Ok(await _pizzaService.AddTopping(dto, toppingId, token));
       
 
