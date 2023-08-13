@@ -28,7 +28,7 @@ public class SauceController : ControllerBase
 
 
    [HttpPost]
-   public async Task<IActionResult> CreatePizza([FromBody]CreateSauceDto dto, CancellationToken token)
+   public async Task<IActionResult> CreateSauce([FromBody]CreateSauceDto dto, CancellationToken token)
       => Ok(await _sauceServices.CreateSauce(dto, token));
 
 
