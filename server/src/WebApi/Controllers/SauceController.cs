@@ -6,9 +6,7 @@ using Persistence.Context;
 
 namespace WebApi.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class SauceController : ControllerBase
+public class SauceController : BaseController
 {
    private readonly ISauceServices _sauceServices;
    public SauceController(ISauceServices sauceServices)

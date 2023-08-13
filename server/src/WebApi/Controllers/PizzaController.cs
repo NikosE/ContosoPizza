@@ -3,11 +3,9 @@ using Domain.Dto;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ContosoPizza.Controllers;
+namespace WebApi.Controllers;
 
-[ApiController]
-[Route("[controller]")]
-public class PizzaController : ControllerBase
+public class PizzaController : BaseController
 {
    private readonly IPizzaService _pizzaService;
    

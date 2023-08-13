@@ -4,9 +4,7 @@ using Persistence.Context;
 
 namespace WebApi.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class CouponController : ControllerBase
+public class CouponController : BaseController
 {
    private readonly PromotionsContext _context;
    public CouponController(PromotionsContext context)

@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ToppingController : ControllerBase
+public class ToppingController : BaseController
 {
 private readonly IToppingServces _toppingServces;
    public ToppingController(IToppingServces toppingServces)
